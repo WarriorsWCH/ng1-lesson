@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<!--angular的输出可以使用表达式，和js写法是一样的-->
+		<p>表达式一枚{{10000 + 20000 - 5000}}</p>
+		
+		<ul>
+			<!--购物车类型的功能比较常见-->
+			<li>单价：<input type="text" ng-model="money"/></li>
+			<li>总量：<input type="text" ng-model="num"/></li>
+			<li>总价：{{money * num}}</li>
+		</ul>
+		
+		
+	</body>
+</html>

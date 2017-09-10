@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="ctr">
+			<form name="form">
+				<input type="email" ng-model="text" name="mytext"/>
+				
+				<!--form.mytext 获取表单名为form下面name为mytext的值  
+					$valid 判断是否合法  true
+				 -->
+				<div>{{form.mytext.$valid}}</div>
+				<!--$invaild 不合法为true-->
+				<div>{{form.mytext.$invalid}}</div>
+				<!--$dirty 填写数据为true-->
+				<div>{{form.mytext.$dirty}}</div>
+				<!--$error 错误信息-->
+				<div>{{form.mytext.$error}}</div>
+			</form>
+		</div>
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope){
+				
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body ng-controller="ctr">
+		
+		
+		
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope,$cacheFactory){
+				
+				//$cacheFactory 和本地存储类似
+				
+				//可以传第二个参数:capacity规定mycache的缓存长度/个数/大小
+				var cache = $cacheFactory('myCache',{capacity:4});
+				
+				//存储数据
+				cache.put('name','tom');
+				cache.put('age' ,'20');
+				cache.put('name1','tom1');
+				cache.put('age1' ,'201');
+				//超出缓存的长度，后面的会覆盖前面的
+				cache.put('name','jack');
+				cache.put('age' ,'30');
+				//info 该缓存的所有数据
+				console.log(cache.info());
+				
+				//获取某个缓存中键的值
+				console.log(cache.get('name'));
+				
+				//删除某个数据
+				cache.remove('age');
+				console.log(cache.get('age'));
+				
+			});
+			
+			
+		</script>
+	</body>
+</html>

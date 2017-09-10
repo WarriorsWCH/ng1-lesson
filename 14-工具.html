@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		
+		<script>
+			
+			var arr = [];
+			//判断是否是数组
+			console.log(angular.isArray(arr));
+			console.log(angular.isDate(arr));
+			console.log(angular.isDefined(arr));
+			console.log(angular.isNumber(arr));
+			console.log(angular.isObject(arr));
+			console.log(angular.isString(arr));
+			console.log(angular.isElement(arr));
+			
+			angular.bind();//改变this指针的指向
+			
+			var obj1 = {
+				name : 'a'
+			}
+			var obj2 = {
+				name : 'b'
+			}
+			var c = angular.copy(obj1,obj2);
+			//把obj1所有的属性拷贝到obj2,重复就是覆盖
+			console.log(c);
+			
+			var d = angular.extend(obj1,obj2);//继承
+			//判断两个变量是否相等
+			console.log(angular.equals(obj1,obj2));
+			
+			//遍历
+			angular.forEach([1,2,3,4],function(v,i){
+				console.log(v,i);
+			});
+			
+			//序列化 和反序列化
+			angular.toJson({name:'a'}); //JSON.stringify()
+			angular.fromJson('{"name":"a"}');//JSON.parse()
+			
+			//获取DOM，设置css样式   尽量使用使用angular给我们提供的方法
+			var body = document.querySelector('body');
+			
+			//element 参数DOM元素
+			console.log(angular.element(body));
+			angular.element(body).css('background','red');
+			
+		</script>
+
+	</body>
+</html>

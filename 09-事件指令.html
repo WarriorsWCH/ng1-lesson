@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		
+		<div ng-controller="ctr">
+			<select>
+				<option>red</option>
+				<!--ng-selected 选中状态
+					如果为true，当前选项被选中
+				-->
+				<option ng-selected="true">blue</option>
+			</select>
+			<br />
+			改变：<input type="text" ng-change="change='改变就是我'" ng-model="change"/>{{change}}
+			<br />
+			复制：<input type="text" ng-copy="copy='复制'" ng-model="copy"/>{{copy}}
+			<br />
+			剪切：<input type="text" ng-cut="cut='剪切'" ng-model="cut"/>{{cut}}
+			<br />
+			粘贴：<input type="text" ng-paste="paste='粘贴'" value="paste"/>{{paste}}
+			
+		</div>
+		
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope){
+				
+			})
+		</script>
+	</body>
+</html>

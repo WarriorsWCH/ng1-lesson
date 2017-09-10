@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		
+		<app-hello>
+			<app-hi>
+				<div></div>
+			</app-hi>
+		</app-hello>
+		
+		<app-ha>
+			<app-hi></app-hi>
+		</app-ha>
+		
+		<script>
+			
+			var app = angular.module('app',[]);
+			app.directive('appHello',function(){
+				
+				return {
+					restrict:'E',
+					replace:true,
+					template:'<div>hello<h1></h1>hello</div>'
+				}
+			})
+			app.directive('appHa',function(){
+				
+				return {
+					restrict:'E',
+					replace:true,
+					//嵌入
+					transclude:true,
+					template:'<div>hello<h1 ng-transclude></h1>hello</div>'
+					//ng-transclude 嵌入到h1标签内
+				}
+			})
+			app.directive('appHi',function(){
+				
+				return {
+					restrict:'E',
+					replace:true,
+					transclude:true,
+					template:'<span>hi hi</span>'
+				}
+			})
+			
+			
+		</script>
+		
+		
+		
+		
+	</body>
+</html>

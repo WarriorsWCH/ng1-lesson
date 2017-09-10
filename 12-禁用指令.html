@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="ctr">
+			<input type="button" ng-disabled="isDis" ng-value="text" />
+		</div>
+		
+		
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope,$interval){
+				
+				var time = 5;
+				$scope.text = 5 + '秒';
+				// ng-disabled true 就是不能被点击
+				$scope.isDis = true;
+				
+				var timer = $interval(function(){
+					time--;
+					$scope.text = time + '秒';
+					if(time <= 0){
+						//取消定时器
+						$interval.cancel(timer);
+						//可以被点击
+						$scope.isDis = false;
+						$scope.text = '可以被点击了';
+					}
+				},1000)
+				
+			});
+		</script>
+		
+	</body>
+</html>

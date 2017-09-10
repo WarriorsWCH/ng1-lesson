@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		
+		<div ng-controller="ctr">
+			<p>{{name}}</p>
+		</div>
+		
+		<script>
+			var app = angular.module('app',[]);
+			//第一个字母大写
+			//自定义该过滤器
+			//firstUpper 过滤条件的名字
+			app.filter('firstUpper',function(){
+				//返回值  是一个方法
+				return function(str){
+					//传进来的字符串，要过滤的字符串
+					
+					//这个函数的返回值是过滤后的结果
+					return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
+				}
+			});
+			
+			app.controller('ctr',function($scope,$filter){
+				
+				$scope.name = 'helloWorld';
+				//firstUpper 自定义的过滤条件
+				$scope.name = $filter('firstUpper')($scope.name);
+			});
+		</script>
+		
+	</body>
+</html>

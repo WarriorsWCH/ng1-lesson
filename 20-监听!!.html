@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		
+		<div ng-controller="ctr">
+			<p>数量：<input type="text" ng-model="num"/></p>
+			<p>价格：<input type="text" ng-model="price"/></p>
+			<p><span>数量：{{num}}</span></p>
+			<p><span>价格：{{price}}</span></p>
+			<p><span>总价：{{money()}}</span></p>
+			<p>{{tip}}</p>
+		</div>
+		
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope){
+				
+				$scope.num = "";
+				$scope.price = "";
+				$scope.tip = "";
+				$scope.money = function(){
+					return $scope.num * $scope.price;
+				}
+				//$watch() 监听某个数据/多个数据，发生变化的时候需要干什么
+				$scope.$watch($scope.money,function(newVal,oldVal){
+					//newVal 新的值 oldVal旧的值
+					console.log('总价发生了变化');
+					console.log(newVal);
+					console.log(oldVal);
+					if(newVal > 10000000){
+						$scope.tip = '你的预算已经超额，你确定要剁手吗';
+					}
+				});
+				//$watch 不要频繁的使用，会影响性能
+				
+			});
+		</script>
+		
+	</body>
+</html>

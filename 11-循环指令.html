@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+		<style>
+			.css1{
+				background: red;
+			}
+			.css2{
+				background: blue;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div ng-controller="ctr">
+			<ul>
+				<!--$index 数组的索引-->
+				<li ng-repeat="data in datalist">{{$index}}</li>
+			</ul>
+			<ul>
+				<!--数组的第一个元素的值为真  $middle中间true $last最后true-->
+				<li ng-repeat="data in datalist">{{$middle}}</li>
+			</ul>
+			<ul>
+				<!--$even偶数true  $odd奇数true-->
+				<li ng-repeat="data in datalist">{{$even}}</li>
+			</ul>
+			<ul>
+				<li ng-repeat="data in datalist" class="{{$even ? 'css1' : 'css2'}}">
+					{{data}}
+				</li>
+			</ul>
+			
+			<ul>
+				<li ng-repeat-start="user in dataObj">
+					{{user.name}}
+				</li>
+				<li ng-repeat-end>
+					{{user.age}}
+				</li>
+			</ul>
+		</div>
+		
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope){
+				
+				$scope.datalist = ['a','b','c','d'];
+				
+				$scope.dataObj = [
+					{name:'xiaoming1',age:10},
+					{name:'xiaoming2',age:11},
+					{name:'xiaoming3',age:12},
+					{name:'xiaoming4',age:13}
+				];
+				
+			});
+		</script>
+		
+	</body>
+</html>

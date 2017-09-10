@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+		<style>
+			#div1{
+				border: 1px solid red;
+			}
+			#div2{
+				border: 1px solid blue;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div ng-controller="ctr">
+			<div app-tap my-id='div1' my-text='name' my-fn='show()'></div>
+		</div>
+		
+		<div ng-controller="ctr2">
+			<div app-tap my-id='div2' my-text='age' my-fn='log()'></div>
+		</div>
+		
+		<script>
+			
+			var app = angular.module('app',[]);
+			app.directive('appTap',function(){
+				
+				return {
+					restrict : 'A',
+					replace : true,
+					//对象定义的是指令（定义指令的输出形式）
+					//隔离作用域
+					scope : {
+						//myId myText myFn都是指令
+						//@ = 函数 代表使用这些指令的时候，=号右边的数据（）
+						myId : '@',//普通字符串
+						myText : '=',//  变量（内容/变量的内容）
+						myFn : '&'// 函数
+					},//真正的数据的输出、元素的行为、样式的设置都是使用这些指令
+//					template : '<div></div>'
+					templateUrl : 'template/template1.html',
+					controller : function($scope){
+						$scope.name = 'aaa';
+					}
+				}
+			})
+			app.controller('ctr',function($scope){
+				$scope.name = "TOM";
+				$scope.show = function(){
+					console.log('你点击了按钮');
+				}
+			})
+			app.controller('ctr2',function($scope){
+				$scope.age = 10;
+				$scope.log = function(){
+					console.log('lolololooolaaa');
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

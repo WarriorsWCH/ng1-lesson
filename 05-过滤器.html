@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		
+		<div ng-controller="ctr">
+			<!--过滤:转小写-->
+			<p>姓名：{{name | lowercase}}</p>
+			<!--过滤:转大写-->
+			<p>姓名：{{name | uppercase}}</p>
+			
+			数量：<input type="number" ng-model="num"/>
+			价格：<input type="number" ng-model="price" />
+			<p>总价：{{num * price | currency:'￥'}}</p>
+			<!--过滤：currency把数字格式化成货币-->
+			<!-- | 后面是过滤的条件-->
+			
+			<ul>
+				<!--orderBy 升序排列   条件是数组，降序使用-负号
+					filter:5 只过滤包含5的数据
+				-->
+				<li ng-repeat="x in arr | orderBy:['age','-work'] | filter:5">
+					{{x.name + " " + x.sex + " " + x.age + ' ' + x.work}}
+				</li>
+			</ul>
+			
+			
+			<p>{{num | number : 4}}</p>
+			<!--number保留小数的位数-->
+			<p>{{money | limitTo : 2}}</p>
+			<!--限制输出的个数/长度-->
+			<p>{{year | date : 'yyyy'}}</p>
+			<!--转成时间格式-->
+			<p>{{data}}</p>
+			
+			
+		</div>
+		
+		<script>
+			//要使用服务（$开头），需要引入这个服务
+			angular.module('app',[]).controller('ctr',function($scope,$filter){
+				$scope.name = "LuckyDog";
+				$scope.num = 1;
+				$scope.price = 99.9;
+				$scope.arr = [
+					{name:'xiaoming',sex:'male',age:'20',work:5},
+					{name:'xiaohong',sex:'female',age:'24',work:10},
+					{name:'xiaoqiang',sex:'male',age:'24',work:2},
+					{name:'xiaoli',sex:'male',age:'18',work:15}
+				];
+				$scope.num = 11111.23242344345;
+				$scope.money = "money";
+//				$scope.money = ['a','b','c'];
+				$scope.year = 238129382349;
+				//$filter 过滤器
+				$scope.data = $filter('date')('2234324324324');
+				
+			})
+		</script>
+		
+	</body>
+</html>

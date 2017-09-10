@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="parentCtr">
+			<h1>{{name}}</h1>
+			<h2>{{address}}</h2>
+			<button ng-click="changeA()">搬家</button>
+			
+			<div ng-controller="childCtr1">
+				<h1>{{name}}</h1>
+				<h2>{{address}}</h2>
+				<h3>{{mobile}}</h3>
+			</div>
+			<div ng-controller="childCtr2">
+				<h1>{{name}}</h1>
+				<h3>{{mobile}}</h3>
+				<button type="button" ng-click="call()">打电话</button>
+			</div>
+		</div>
+		
+		<script>
+			var app = angular.module('app',[]);
+			app.controller('parentCtr',function($scope){
+				$scope.name = "小头爸爸";
+				$scope.address = "东京很热的地方";
+				//搬家了  
+				$scope.changeA = function(){
+					$scope.address = "搬到了一个也很热的地方，保法肿瘤医院对面";
+				}
+				//接受子控制器传递过来的消息
+				//$on 监听消息
+				$scope.$on('callBH',function(){
+					//通知childCtr1
+					//$broadcast 向子控制器传递消息
+					$scope.$broadcast('FlowerIsCalling');
+				})
+			})
+			
+			app.controller('childCtr1',function($scope){
+				//$scope会继承父控制器的$scope的属性
+				$scope.name = '大头儿子';
+//				$scope.address = '';
+				$scope.mobile = "待机";
+				
+				$scope.$on('FlowerIsCalling',function(){
+					$scope.mobile = "母老虎来电了，小心你的头";
+				})
+			})
+			
+			app.controller('childCtr2',function($scope){
+				$scope.name = "小花";
+				$scope.mobile = "待机";
+				//打电话
+				$scope.call = function(){
+					//目的：childCtr1中mobile显示来电信息
+					
+					$scope.mobile = "大头大头，下雨了，把头借我";
+					
+					//向父控制器传递消息
+					$scope.$emit('callBH');
+				}
+			})
+			//childCtr2  - parentCtr  - childCtr1
+		</script>
+	</body>
+</html>

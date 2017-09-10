@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		
+		<div ng-controller="ctr">
+			<input type="text" ng-model="model" />
+			<p>{{model}}</p>
+		</div>
+		
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope,$timeout){
+				
+//				$scope.model = '默认';
+				
+				$timeout(function(){
+					//$scope.model 修改了，对应的ng-model="model"的值也会改变
+					$scope.model = "修改了";
+				},5000);
+				
+				//$timeout angular内置的定时器，用法和原生一样
+				//尽量不要使用原生的，通常使用是没有问题但是，
+				//但是复杂的项目中有可能会引起数据绑定的实效
+				
+				
+			})
+		</script>
+		
+		
+	</body>
+</html>

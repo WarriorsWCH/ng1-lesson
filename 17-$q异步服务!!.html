@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body ng-controller="ctr">
+		
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope,$q,$timeout){
+				//$q异步服务
+				
+				//创建异步对象，对promise进行了二次的封装，
+				//把promise这个对象作为defer对象的属性存在的
+				var obj = $q.defer();//延迟对象
+				
+				//异步函数/操作
+				function show(){
+					$timeout(function(){
+						//一些异步操作   比如请求，下载，复杂的动画逻辑
+						
+						//成功
+						obj.resolve('一些数据');
+					},2000);
+					
+					return obj.promise;
+				}
+				
+				show().then(function(data){
+					
+					console.log('数据下载完成');
+					console.log(data);
+				})
+				
+			});
+		</script>
+		
+		
+	</body>
+</html>

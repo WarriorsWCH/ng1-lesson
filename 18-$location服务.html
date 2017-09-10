@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body ng-controller="ctr">
+		
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope,$location){
+				
+				//$location 处理路径/地址的服务
+				
+				//拿到绝对地址
+				var url = $location.absUrl();
+				//http://192.168.0.159:8020/Angular/18-$location%E6%9C%8D%E5%8A%A1.html
+				
+				//拼接路径
+				$location.path('/home/index');
+				//# 哈希值
+				$location.hash('user');
+				//拼接参数 ？ 后面
+				$location.search({'name':'jack','age':'20'});
+				
+				console.log(url);
+				
+				console.log($location.port());//端口
+				console.log($location.host());//主机
+				console.log($location.protocol());//协议  http  https
+				
+			});
+		</script>
+	</body>
+</html>

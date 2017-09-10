@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="ctr">
+			<div app-tap></div>
+			<strong>{{name}}</strong>
+		</div>
+		
+		<script>
+			var app = angular.module('app',[]);
+			app.controller('ctr',function($scope){
+				$scope.name = 'li';
+			})
+			app.directive('appTap',function(){
+				
+				return {
+					restrict : 'A',
+					replace : true,
+					template : "<h1>{{name}}</h1>",
+					//scope false true 对象
+					//默认是false  
+					//子控制器作用域$scope中的属性会影响父控制器中$scope的属性
+//					scope : false,//共享作用域
+					//子控制器和夫控制器中的$scope互不影响
+					scope : true,//独立作用域
+					//controller 创建控制器（和ng-controller的区别就是没有名字）
+					controller : function($scope){
+						$scope.name = 'zhang';
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

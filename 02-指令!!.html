@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+		<style>
+			.red{
+				background-color: red;
+			}
+			.blue{
+				background-color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!--指令：通常是以ng-开头的，指令可以操作DOM（DOM上的数据、DOM的结构、DOM的显示）-->
+		
+		<!--ng-init 初始化当前范围内的数据
+			初始化了变量text的值是什么
+		-->
+		<div ng-init="text='厉害了world的nagular'">
+			<!--ng-bind 把相应范围内的数据绑定到这个标签上，并显示数据-->
+			<p ng-bind="text"></p>
+		</div>
+		
+		<!--初始化数据和js的写法是一样的-->
+		<div ng-init="heros=['寒冰','龙虾','剑圣']">
+			<ul>
+				<!--ng-repeat 循环显示数据,创建了DOM元素
+					hero是数组heros的元素
+				-->
+				<li ng-repeat="hero in heros">
+					{{hero}}
+				</li>
+				
+			</ul>
+		</div>
+		
+		<div ng-init="objects={name:'jack',age:'29'}">
+			<!--<p>{{objects.name}}</p>
+			<p>{{objects.age}}</p>-->
+			<!--建议这样使用数据的绑定和显示-->
+			<p ng-bind="objects.name"></p>
+			<p ng-bind="objects.age"></p>
+		</div>
+		
+		<div>
+			<!--ng-click 绑定一个点击事件-->
+			<button ng-click="count = count + 1" ng-init="count=0">计数按钮</button>
+			<p>你点了{{count}}次</p>
+		</div>
+		
+		
+		<div>
+			<select ng-model="bgcolor">
+				<!--bgcolor=red/blue-->
+				<option value="red">大红</option>
+				<option value="blue">蔚蓝</option>
+			</select>
+			<!--ng-class 设置class的值就是ng-class的值
+				class='red'/'blue'
+			-->
+			<div ng-class="bgcolor">
+				<p>随便什么内容</p>
+			</div>
+		</div>
+		
+		
+		<div>
+			隐藏:<input type="checkbox" ng-model="show" />
+			<!--ng-hide  根据它的值来判断当前所在元素是否隐藏
+				ng-hide的值是true，就会隐藏，
+				checkBox，选中的时候，value值才是true（show=true）
+				
+				ng-show和ng-hide正好相反
+			-->
+			<div ng-hide="show">
+				<h1>我出来了</h1>
+			</div>
+		</div>
+		
+		<div>
+			判断:<input type="checkbox" ng-model="dis" />
+			<!--ng-if的值是true会显示标签，如果是false会移除标签
+				不要特别频繁的操作这个指令，会影响性能
+			-->
+			<div ng-if="dis">
+				<h1>判断显示什么元素</h1>
+			</div>
+		</div>
+		
+		<!--
+			Angular的HTML编译器能让浏览器识别新的HTML语法，
+			特能让你将行为关联到HTML元素或者属性，甚至能让你
+			创建具有自定义行为的新元素，这种扩展行为就是指令
+			
+			指令：当前关联的html结构进入angular编译阶段时
+			应该执行的操作
+		-->
+		
+	</body>
+</html>

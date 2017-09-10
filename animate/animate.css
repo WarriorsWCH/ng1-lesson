@@ -1,0 +1,80 @@
+
+.page{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	text-align: center;
+	padding-top: 200px;
+	width: 100%;
+}
+.page-home{
+	background-color: darkred;
+}
+.page-news{
+	background-color: cadetblue;
+}
+.page-mes{
+	background-color: darkgreen;
+}
+.page-my{
+	background-color: yellowgreen;
+}
+
+@keyframes scaleHome{
+	from{
+		opacity: 0.3;
+		transform: scale(0.8);
+	}
+}
+
+@keyframes rotateHome{
+	0% {transform: rotateZ(0deg);}
+	20%{transform: rotateZ(10deg);}
+	40%{transform: rotateZ(15deg);}
+	60%{transform: rotateZ(20deg);}
+	80%{transform: rotateZ(30deg);}
+	100%{transform: rotateZ(100deg);}
+}
+
+@keyframes slideNews{
+	from {transform: translateX(100%);}
+}
+@keyframes slideNewsLeave{
+	to {transform: translateX(-100%);}
+}
+
+/*进场动画 */
+.page-home.ng-enter{
+	animation: scaleHome 1s ease-in;
+}
+/*退场动画*/
+.page-home.ng-leave{
+	transform-origin:0 0;
+	animation: rotateHome 1s ease-in;
+}
+
+.page-news.ng-enter{
+	animation: slideNews 1s ease-in;
+}
+.page-news.ng-leave{
+	animation: slideNewsLeave 1s ease-in;
+}
+@keyframes slideMes{
+	from{transform: translateY(100%);}
+	to{transform: translateY(0);}
+}
+
+
+.page-mes.ng-enter{
+	animation: slideMes 1s ease-in;
+}
+.page-mes.ng-leave{
+	
+	
+}
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+		<style>
+			.tip{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<form name="form" ng-controller="ctr" ng-submit="submit()">
+			<ul>
+				<li>
+					<label>用户名：</label>
+					<!--ng-pattern 验证是否符合某个正则-->
+					<input type="text" name="username" ng-model="user.username" 
+						placeholder="请输入用户名..." ng-pattern="/^\w{4,8}$/" />
+					<span class="tip" 
+						ng-show="form.username.$invalid && form.username.$dirty">
+						<!--$invalid 用户输入不符合正则  dirty用户填写信息-->
+						<span>请输入4到8位的用户名</span>
+					</span>
+				</li>
+				<li>
+					<label>密码：</label>
+					<input type="password" name="passowrd" ng-model="user.password" 
+						placeholder="请输入密码..." ng-pattern="/^\w{8,16}$/"/>
+					<span class="tip" 
+						ng-show="form.passowrd.$invalid && form.passowrd.$dirty">
+						<span>请输入8到16位的用户密码</span>
+					</span>
+				</li>
+				<li>
+					<label>邮箱：</label>
+					<input type="email" name="email" ng-model="user.email" 
+						placeholder="请输入邮箱..." required/>
+						<!--required 必填的-->
+				</li>
+				<li>
+					<label>年龄：</label>
+					<input type="number" name="age" ng-model="user.age" 
+						placeholder="请输入年龄..." required 
+						ng-maxlength="2" ng-minlength="1"/>
+					<span class="tip" 
+						ng-show="form.age.$invalid && form.age.$dirty">
+						<span>请输入正确的年龄，不要虚构</span>
+					</span>
+				</li>
+				
+				<li>
+					<input ng-disabled="!form.$valid" type="submit" value="提交" />
+					<!--form.$valid 对整个表单做校验，只有全部符合规则，才能够提交-->
+				</li>
+			</ul>
+			
+		</form>
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope,$http){
+				//拿到用户的填写的信息
+				$scope.user = {
+					username : '',
+					password : '',
+					email : '',
+					age : ''
+				};
+				//点击提交按钮，才向服务器提交数据
+				$scope.submit = function(){
+					
+					console.log($scope.user);
+					
+					//需要向服务器提交用户添加的信息
+//					$http.post('http://ipxxxxx/form/post',$scope.user).success(function(res){
+//						
+//					}).error(function(err){
+//						
+//					})
+					//http://ipxxxxx/form/post?username=啊啊&password=aa&email=11@qq&age=11
+				}
+				
+				
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		
+		<div ng-controller="ctr">
+			<input type="text" ng-model="filterVal" />
+			<input type="button" value="搜索" ng-click="search()"/>
+			<table border="1">
+				<tr>
+					<th>姓名</th>
+					<th>年龄</th>
+				</tr>
+				<tr ng-repeat="data in dataList">
+					<td>{{data.name}}</td>
+					<td>{{data.age}}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<script>
+			
+			angular.module('app',[]).controller('ctr',function($scope,$filter){
+				var dataArr = [];
+				//数据源/绑定的数据
+				$scope.dataList = [
+					{name:'red',age:20},
+					{name:'blue',age:22},
+					{name:'black',age:10},
+					{name:'white',age:20}
+				];
+				//让dataArr和数据源一样
+				dataArr = $scope.dataList;
+				$scope.filterVal = '';
+				
+				$scope.search = function(){
+					//过滤操作
+					console.log('被点了');
+					//从数据源dataList（dataArr）中查找数据，
+					//查找的就是我们输入的内容$scope.filterVal
+					//然后返回的数组，在进行数据的显示
+					$scope.dataList = $filter('filter')(dataArr,$scope.filterVal);
+					//数据的双向绑定
+				};
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

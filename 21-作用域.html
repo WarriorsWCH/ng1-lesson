@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<p>{{name}}</p>
+		
+		<div ng-controller="ctr1">
+			<input type="text" ng-model="$root.name" />
+			<p>这是控制器ctr1的数据：{{$root.name}}</p>
+		</div>
+		
+		<div ng-controller="ctr2">
+			<input type="text" ng-model="$root.name" />
+			<p>这是控制器ctr2的数据：{{$root.name}}</p>
+		</div>
+		
+		<script>
+			//作用域：$scope只是针对当前控制器（controller）的作用域生效，
+			//$scope（controller）是view（DOM元素）和数据（$scope上挂载的属性）之间前两
+			//$rootScope根作用域，指针对全局作用域生效
+			
+			var app = angular.module('app',[]);
+			app.controller('ctr1',function($scope,$rootScope){
+
+				$scope.name = 'jack';
+//				$rootScope.name = "泰坦尼克";
+				$rootScope.name = $scope.name;
+			});
+			app.controller('ctr2',function($scope,$rootScope){
+				$scope.name = 'rose';
+//				$rootScope.name = "泰坦尼克2";
+				$rootScope.name = $scope.name;
+			});
+			
+		</script>
+		
+	</body>
+</html>

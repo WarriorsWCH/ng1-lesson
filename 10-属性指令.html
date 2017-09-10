@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="ctr">
+			<!--属性指令   如果不和其他指令关联，需要时用{{}}输出-->
+			<div ng-class="{{cls}}">red</div>
+			<!--ng-style 行间样式-->
+			<div ng-style="{{myStyle}}">style</div>
+			
+			<a ng-href="{{url}}" ng-attr-title="{{title}}">链接</a>
+			<!--除了class href style 其他的属性之灵都需要加加上attr-->
+			
+		</div>
+		<script>
+			angular.module('app',[]).controller('ctr',function($scope){
+				$scope.cls = "red";
+				$scope.myStyle = "{color:'blue',background:'red'}";
+				$scope.url = "http://www.baidu.com";
+				$scope.title = "提示";
+			})
+		</script>
+	</body>
+</html>

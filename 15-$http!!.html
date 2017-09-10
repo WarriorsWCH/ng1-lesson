@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body ng-controller="ctr">
+		
+		
+		<script>
+			//服务  --- 必须引入服务才能使用
+			//工具  --- 直接用angular就能调用
+			angular.module('app',[]).controller('ctr',function($scope,$http){
+				
+				//$http.get GET请求   $http.post  POST请求
+//				$http.get('cdJson.json?id=10&age=20')
+//				$http.get('cdJson.json',{
+//					params:{
+//						id : 10,
+//						age : 20
+//					}
+//				})
+				//angular的ajax请求
+				//内部是使用promise实现的
+				$http.get('cdJson.json').success(function(data){
+					console.log(data);
+				}).error(function(err){
+					console.log(err);
+				});
+				
+			});
+			
+			
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

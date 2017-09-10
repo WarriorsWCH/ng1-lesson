@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--jquery在angular之前引入-->
+		<script src="js/jquery.js"></script>
+		<script src="js/angular.min.js"></script>
+		
+		<style>
+			#div1 div,#div2 div{
+				width: 200px;
+				height: 200px;
+				border: 1px solid red;
+				display: none;	
+			}
+			#div1 input.active,#div2 input.active{background-color: red;}
+		</style>
+	</head>
+	<body ng-controller="con">
+		<!--指令调用 ng-tab -->
+		<my-tab my-id='div1' my-data='data1'></my-tab>
+		<my-tab my-id='div2' my-data='data2'></my-tab>
+		{{name}}
+		<script>
+			var app = angular.module('app',[]);
+			//自定义指令myTab 驼峰命名
+			app.directive('myTab',function(){
+				return {
+					restrict:'AEC',
+					replace:true,
+					scope:{
+						myId:'@',
+						myData:'='
+					},
+					//引入模板的地址
+					templateUrl:'template/template2.html',
+					//link DOM操作相关/angular编译后会执行link
+					link:function($scope,element,attr){
+					
+						console.log(attr);
+						
+						element.on('click','input',function(){
+							//input标签添加active类，让其他的input去掉active
+							$(this).attr('class','active').siblings('input').attr('class','');
+							$(this).siblings('div')
+									.eq($(this).index())
+									.css('display','block')
+									.siblings('div')
+									.css('display','none');
+						})
+						
+					}
+				}
+			})
+			
+			app.controller('con',function($scope){
+				console.log($scope.name)
+				$scope.data1 = [
+					{title:'首页', content:'阿三几点回家艾斯快递哈就是'},
+					{title:'新闻', content:'水电费说过话'},
+					{title:'娱乐', content:'随碟附送他个人'},
+					{title:'影视', content:'问题问题榕榕兔'},
+				];
+				
+				$scope.data2 = [
+					{title:'图片', content:'去WR问题温润如玉'},
+					{title:'视频', content:'QERFQ额头WEYT'},
+					{title:'段子', content:'YUUITYUOYUJYT单位'},
+				];
+
+			})
+			
+		
+		</script>
+	</body>
+</html>
